@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Recaptcha and Disabled Button</title>
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+</head>
+<body>
+  <h1>Recaptcha and Disabled Button</h1>
+  <form>
+    <div class="g-recaptcha" data-sitekey="6LdtnpApAAAAANozI1TBzaatbNLF0EK23VY8xkwz"></div>
+    <br>
+    <button type="submit" id="submit-button" disabled>Submit</button>
+  </form>
+  <style>
+    .g-recaptcha {
+  transform:scale(0.77);
+  transform-origin:0 0;
+}
+  </style>
+  <script>
+    var recaptchaVerifier;
+window.onload = function() {
+  recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+    'size': 'invisible',
+    'callback': function(response) {
+      // reCAPTCHA solved, allow submit button
+      document.getElementById('submit-button').disabled = false;
+    }
+  });
+  recaptchaVerifier.render().then(function() {
+    console.log('reCAPTCHA widget rendered.');
+  });
+};
+  </script>
+</body>
+</html>
