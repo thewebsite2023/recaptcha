@@ -1,36 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Recaptcha and Disabled Button</title>
-  <script src="https://www.google.com/recaptcha/api.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reCAPTCHA Example</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
-  <h1>Recaptcha and Disabled Button</h1>
-  <form>
-    <div class="g-recaptcha" data-sitekey="6LdtnpApAAAAANozI1TBzaatbNLF0EK23VY8xkwz"></div>
-    <br>
-    <button type="submit" id="submit-button" disabled>Submit</button>
-  </form>
-  <style>
-    .g-recaptcha {
-  transform:scale(0.77);
-  transform-origin:0 0;
-}
-  </style>
-  <script>
-    var recaptchaVerifier;
-window.onload = function() {
-  recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
-    'size': 'invisible',
-    'callback': function(response) {
-      // reCAPTCHA solved, allow submit button
-      document.getElementById('submit-button').disabled = false;
-    }
-  });
-  recaptchaVerifier.render().then(function() {
-    console.log('reCAPTCHA widget rendered.');
-  });
-};
-  </script>
+
+    <!-- Hộp reCAPTCHA -->
+    <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY" data-callback="enableButton"></div>
+    
+    <!-- Button sẽ bị disable cho đến khi chọn reCAPTCHA -->
+    <button id="submitBtn" disabled>Submit</button>
+
+    <script>
+        // Hàm này sẽ được gọi khi reCAPTCHA được chọn
+        function enableButton() {
+            document.getElementById("submitBtn").disabled = false;
+        }
+    </script>
 </body>
 </html>
